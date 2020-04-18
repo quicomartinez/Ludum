@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using UnityEngine;
+using static Interaction;
 
 public class Character : MonoBehaviour
 {
 
     private Controller controller;
     private Animator animator;
-    private CharStats charStats;
+    private Interaction interaction;
     private CharacterController2D characterController2D;
 
     [SerializeField]
@@ -24,7 +25,8 @@ public class Character : MonoBehaviour
     {
         controller = GetComponent<Controller>();
         animator = GetComponent<Animator>();
-        charStats = new CharStats();
+        interaction = new Interaction();
+        interaction.init();
         characterController2D = GetComponent<CharacterController2D>();
     }
 
@@ -43,7 +45,7 @@ public class Character : MonoBehaviour
         if (canInteract && controller.interactPressed)
         {
             UnityEngine.Debug.Log(interactiveObjectsName);
-            Interaction(interactiveObjectsName);
+            interaction.EnterArea(interactiveObjectsName);
         }
     }
 
@@ -74,65 +76,4 @@ public class Character : MonoBehaviour
     {
         canInteract = false;
     }
-
-    private void Interaction(String name)
-    {
-        switch (name)
-        {
-            case "vomit":
-                /*
-                if (charStats.hasMop)
-                  cleanVomit()
-                  upgradeCleanBar() ?
-                else
-                    chanceResbalar()*/
-                break;
-            case "fight":
-                /*
-                 * if (charStats.hasCousin)
-                 *  solveFight()
-                 *  upgradeCopsBar() ?
-                 * else
-                 *  chanceTortazo()
-                 */
-                break;
-            case "wc":
-                charStats.ChangeMop();
-                // resetMop?
-                break;
-            case "cousin":
-                charStats.ChangeCousin();
-                break;
-            case "fridge":
-                if (charStats.hasSixPack)
-                {
-
-                    UnityEngine.Debug.Log("UPGRADE Drink");
-                    charStats.ChangeSixPack();
-                    //upgradeDrinkBar() ?
-                }
-                else
-                {
-                    charStats.ChangeDrink();
-                    
-                }
-                break;
-            case "storage":
-                charStats.ChangeSixPack();
-                break;
-            case "dj":
-                if (charStats.hasDrink)
-                {
-                    charStats.ChangeDrink();
-                    UnityEngine.Debug.Log("UPGRADE DJ");
-                }
-                    //upgradeDjBar?
-                break;
-            case "danceFloor":
-                // if fever?
-                charStats.ChangeDanceFloor();
-                break;
-        }
-    }
-
 }
