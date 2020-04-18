@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
 using UnityEngine;
 
 public class Character : MonoBehaviour
 {
     private Controller controller;
     private Animator animator;
+    private CharStats charStats;
 
     [SerializeField]
     private float moveSpeed = 5f;
@@ -15,12 +18,13 @@ public class Character : MonoBehaviour
     {
         controller = GetComponent<Controller>();
         animator = GetComponent<Animator>();
+        charStats = new CharStats();    
     }
 
     private void Update()
     {
         Movement();
-        Interaction();
+        //Interaction();
     }
 
     private void Movement()
@@ -38,11 +42,35 @@ public class Character : MonoBehaviour
         }
     }
 
-    private void Interaction()
+    void OnTriggerStay2D(Collider2D other)
     {
         if (controller.interactPressed)
         {
-            Debug.Log("APRETADO");
+            String name = other.gameObject.name;
+            UnityEngine.Debug.Log(name);
+            Interaction(name);
         }
     }
+    private void Interaction(String name)
+    {
+        switch (name)
+        {
+            case "mop":
+                charStats.ChangeMop();
+                break;
+            case "cousin":
+                charStats.ChangeCousin();
+                break;
+            case "drink":
+                charStats.ChangeDrink();
+                break;
+            case "sixPack":
+                charStats.ChangeSixPack();
+                break;
+            case "danceFloor":
+                charStats.ChangeDanceFloor();
+                break;
+        }
+    }
+
 }
