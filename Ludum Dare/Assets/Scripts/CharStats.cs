@@ -4,23 +4,14 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 
-public class CharStats : MonoBehaviour
+public class CharStats
 {
-    private bool hasMop;
-    private bool hasCousin;
-    private bool hasSixPack;
-    private bool hasDrink;
-    private bool busy;
+    public bool hasMop;
+    public bool hasCousin;
+    public bool hasSixPack;
+    public bool hasDrink;
+    public bool busy;
     
-    public void Start()
-    {
-        hasMop = false;
-        hasCousin = false;
-        hasSixPack = false;
-        hasDrink = false;
-        busy = false;
-    }
-
     public void RaiseBusy()
     {
         UnityEngine.Debug.Log("U R Busy");

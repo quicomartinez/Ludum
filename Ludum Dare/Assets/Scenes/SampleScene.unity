@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 19509849}
   - component: {fileID: 19509850}
   m_Layer: 0
-  m_Name: mop
+  m_Name: wc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -329,7 +329,7 @@ GameObject:
   - component: {fileID: 535098988}
   - component: {fileID: 535098989}
   m_Layer: 0
-  m_Name: sixPack
+  m_Name: storage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -473,7 +473,7 @@ GameObject:
   - component: {fileID: 1094106742}
   - component: {fileID: 1094106743}
   m_Layer: 0
-  m_Name: drink
+  m_Name: fridge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -594,7 +594,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1181010494}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.1199999, y: -0.06999993, z: -0.8574397}
+  m_LocalPosition: {x: 4.44, y: -3.35, z: -0.8574397}
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_Children:
   - {fileID: 19509849}
@@ -676,7 +676,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1204748250}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.68, y: 1.38, z: -0.8574397}
+  m_LocalPosition: {x: 0.98, y: 0.5, z: -0.8574397}
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_Children:
   - {fileID: 1629153525}
@@ -908,7 +908,7 @@ GameObject:
   - component: {fileID: 1629153525}
   - component: {fileID: 1629153526}
   m_Layer: 0
-  m_Name: dj
+  m_Name: danceFloor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1176,7 +1176,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1777857116}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.51, y: 1.58, z: -0.8574397}
+  m_LocalPosition: {x: 4.1, y: 2.52, z: -0.8574397}
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_Children:
   - {fileID: 332184970}
@@ -1330,7 +1330,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1908111314}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.59, y: 1.43, z: -0.8574397}
+  m_LocalPosition: {x: -4.79, y: -4.71, z: -0.8574397}
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_Children:
   - {fileID: 535098988}
@@ -1412,7 +1412,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1926443386}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.8400002, y: 1.15, z: -0.8574397}
+  m_LocalPosition: {x: -5.89, y: 3.14, z: -0.8574397}
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_Children:
   - {fileID: 1094106742}
