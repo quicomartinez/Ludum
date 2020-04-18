@@ -63,9 +63,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Bars\BarManager.cs" />
     <Compile Include="Assets\Scripts\Bars\FunctionPeriodic.cs" />
+    <Compile Include="Assets\Scripts\Bars\StatBar.cs" />
+    <Compile Include="Assets\Scripts\CharStats.cs" />
     <Compile Include="Assets\Scripts\Character.cs" />
     <Compile Include="Assets\Scripts\Controller.cs" />
+    <Compile Include="Assets\Scripts\Dance.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/KIKO/Desktop/Create with Code/Ludum Dare/Ludum Dare/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
