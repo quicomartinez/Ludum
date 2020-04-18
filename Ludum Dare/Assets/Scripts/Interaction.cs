@@ -61,7 +61,11 @@ public class Interaction
                     //onSixPack2Fridge();
                     UnityEngine.Debug.Log("SixPack Delivered!");
                     if (onSixPack2Fridge != null)
+                    {
                         onSixPack2Fridge();
+                        Debug.Log("ASD");
+                    }
+                        
                     charStats.ChangeSixPack();
                     //upgradeDrinkBar() ?
                 }

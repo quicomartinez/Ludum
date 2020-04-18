@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class StatBarController : MonoBehaviour
 {
+    public GameObject player;
     public GameObject objectStatBarManager;
     StatBarManager statBarManager;
 
@@ -23,8 +24,23 @@ public class StatBarController : MonoBehaviour
     private int numberBeerOnFridge = 0; // max 24
     private int numberBeerHand = 0; // max 6
 
+    // Methods subscribed
+    Character character;
+    Interaction interaction;
+
     void Start()
     {
+        character = player.GetComponent<Character>();
+        interaction = character.GetInteraction();
+        interaction.onVomit += Vomit;
+        interaction.onMop2Vomit += Mop2Vomit;
+        interaction.onFight += Fight;
+        interaction.onCousin2Fight += Cousin2Fight;
+        interaction.onSixPack2Fridge += SixPack2Fridge;
+        interaction.onBeer2Dj += Beer2Dj;
+
+
+        // Bars
         statBarManager = objectStatBarManager.GetComponent<StatBarManager>();
 
         statBarManager.InitializeStatBar(statBarSafety, statSafety);
@@ -69,5 +85,41 @@ public class StatBarController : MonoBehaviour
         Debug.Log("New puke: " + pukeNumber);
         statBarManager.PeriodicallyChangeStatBar(statBarCleanness, -0.01f);
     }
-            
+
+
+    // subscription to methods
+    void Vomit()
+    {
+        Debug.Log("onVomit");
+
+    }
+    void Mop2Vomit()
+    {
+        Debug.Log("onMop2Vomit");
+
+    }
+    void Fight()
+    {
+        Debug.Log("onFight");
+
+    }
+    void Cousin2Fight()
+    {
+        Debug.Log("onCousin2Fight");
+
+    }
+    void SixPack2Fridge()
+    {
+        float sixPackValue = 0.3f;
+        statBarManager.AddValue(statBarBooze, sixPackValue);
+        Debug.Log("onSixPack2Fridge");
+
+    }
+    void Beer2Dj()
+    {
+        float beerValue = 0.3f;
+        statBarManager.AddValue(statBarDjFokus, beerValue);
+        Debug.Log("onBeer2Dj");
+
+    }
 }

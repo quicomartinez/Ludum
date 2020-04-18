@@ -4,18 +4,42 @@ using UnityEngine;
 
 public class NewVomitToTheParty : MonoBehaviour
 {
-
     [SerializeField]
     private GameObject vomit;
 
-    private void Start()
+    private Coroutine coroutine;
+    private HandlePeople handlePeople;
+
+    private void Awake()
     {
-        InvokeRepeating("NewVomitComing", 8.0f, 6f);
+        handlePeople = GetComponent<HandlePeople>();
     }
 
-    private void NewVomitComing()
+    private void Start()
     {
-        Instantiate(vomit, new Vector3(-5f, -3.5f, 0), Quaternion.identity);
-        UnityEngine.Debug.Log("V");
+        PeriodicallyInstantiateVomit();
     }
+
+    public void PeriodicallyInstantiateVomit()
+    {
+        if (coroutine != null)
+        {
+            StopCoroutine(coroutine);
+        }
+        coroutine = StartCoroutine(InstantiateVomitIE());
+    }
+
+    //waitTime is now a random Number; we can make it a propierty that changes with the game stats.
+    public IEnumerator InstantiateVomitIE()
+    {
+        while (true)
+        {
+            GameObject npcToInstantiate = handlePeople.GetRandomNpc();
+            Instantiate(vomit, npcToInstantiate.transform.position, Quaternion.identity);
+
+            float waitTime = Random.Range(2, 4f);
+            yield return new WaitForSeconds(waitTime);
+        }
+    }
+
 }

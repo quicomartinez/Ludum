@@ -76,4 +76,9 @@ public class Character : MonoBehaviour
     {
         canInteract = false;
     }
+
+    public Interaction GetInteraction()
+    {
+        return interaction;
+    }
 }

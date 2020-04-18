@@ -9,6 +9,8 @@ public class AutoMove : MonoBehaviour
 
     private void Start()
     {
+        //GetComponent<HandlePeople>().AddNPC(this.gameObject);
+
         xCoordinate = Random.Range(-2f, 5.8f);
         yCoordinate = Random.Range(-2f, 3f);
 
