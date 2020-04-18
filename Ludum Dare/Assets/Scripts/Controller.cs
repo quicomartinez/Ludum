@@ -18,7 +18,7 @@ public class Controller : MonoBehaviour
 
     private void Update()
     {
-        interactPressed = Input.GetButtonUp(interactButton);
+        interactPressed = Input.GetButtonDown(interactButton);
         horizontal = Input.GetAxis(horizontalAxis);
         vertical = Input.GetAxis(verticalAxis);
     }

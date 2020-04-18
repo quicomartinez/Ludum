@@ -7,20 +7,25 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
+
     private Controller controller;
     private Animator animator;
-    private CharStats charStats = new CharStats();
+    private CharStats charStats;
+    private CharacterController2D characterController2D;
 
     [SerializeField]
     private float moveSpeed = 5f;
+    Vector2 direction;
 
     private void Awake()
     {
         controller = GetComponent<Controller>();
-        animator = GetComponent<Animator>();   
+        animator = GetComponent<Animator>();
+        charStats = new CharStats();
+        characterController2D = GetComponent<CharacterController2D>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         Movement();
         //Interaction();
@@ -28,17 +33,20 @@ public class Character : MonoBehaviour
 
     private void Movement()
     {
-        Vector2 direction = controller.GetDirection();
+        direction = controller.GetDirection();
 
         if (direction.magnitude > 0.2f)
         {
-            transform.position += (Vector3)direction * Time.deltaTime * moveSpeed;
+            //transform.position += (Vector3)direction * Time.deltaTime * moveSpeed;
+            characterController2D.velocity = direction * moveSpeed;
             animator.SetBool("walking", true);
         }
         else
         {
+            characterController2D.velocity = Vector2.zero;
             animator.SetBool("walking", false);
         }
+
     }
 
     void OnTriggerStay2D(Collider2D other)
@@ -52,6 +60,7 @@ public class Character : MonoBehaviour
             Interaction(name);
         }
     }
+
     private void Interaction(String name)
     {
         switch (name)
