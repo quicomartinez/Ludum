@@ -12,7 +12,6 @@ public class StatBarController : MonoBehaviour
     [SerializeField] private StatBar statBarCleanness;
     [SerializeField] private StatBar statBarDjFokus;
 
-
     // Initial value for each bar.
     private float statSafety = 0.5f;
     private float statBooze = 0.5f;
@@ -34,23 +33,41 @@ public class StatBarController : MonoBehaviour
         statBarManager.InitializeStatBar(statBarDjFokus, statDjFokus);
 
         // Automatically starting to decrease
-        statBarManager.PeriodicallyChangeStatBar(statBarDjFokus, 1f, -0.01f);
+        statBarManager.PeriodicallyChangeStatBar(statBarDjFokus, 1f, -0.02f, "djFokus", true);
     }
 
     // Update is called once per frame
     void Update()
     {
-       // statBarManager.PeriodicallyChangeStatBar(statBarSafety, 1f, -0.1f);
+        // statBarManager.PeriodicallyChangeStatBar(statBarSafety, 1f, -0.1f);
+        if (Input.GetKeyDown(KeyCode.Space))
+            addNewPuke();
+
+        // Safety
+
+        // Booze
+
+        // Cleanness
+        
+
+        if (pukeNumber > 3)
+        {
+            pukeNumber = 0;
+            statBarManager.StopCoroutine("AddValueIE");
+          //  statBarManager.AddValue(statBarCleanness, -0.1f);
+        }
+
+        // DJ Fokus
+
+
     }
 
     // addnewpuke -> está suscrito al eveto generadoPuke del propio Puke que está existiendo en el juego
     void addNewPuke()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            pukeNumber = pukeNumber + 1; 
-            Debug.Log("New puke: " + pukeNumber);
-        }
-            
+        pukeNumber++;
+        Debug.Log("New puke: " + pukeNumber);
+        statBarManager.PeriodicallyChangeStatBar(statBarCleanness, -0.01f);
     }
+            
 }

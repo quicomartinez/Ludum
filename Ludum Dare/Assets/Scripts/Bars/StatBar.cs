@@ -6,6 +6,7 @@ public class StatBar : MonoBehaviour
 {
     private Transform bar;
     private float value;
+    private Coroutine coroutine;
 
     private void Awake()
     {
@@ -41,4 +42,26 @@ public class StatBar : MonoBehaviour
         return value;
     }
 
+    /* Repeat ... */
+    public void PeriodicallyChangeStatBar(float quantity)
+    {   
+        if(coroutine != null)
+        {
+            StopCoroutine(coroutine);
+        }
+        coroutine = StartCoroutine(AddValueIE( quantity, 1f));
+    }
+    public IEnumerator AddValueIE(float quantity, float repeatRate)
+    {
+        while (true)
+        {
+            AddValue(quantity);
+            yield return new WaitForSeconds(repeatRate);
+        }
+    }
+
 }
+
+
+
+

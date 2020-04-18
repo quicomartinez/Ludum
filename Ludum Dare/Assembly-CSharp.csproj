@@ -70,6 +70,7 @@
     <Compile Include="Assets\Navigation2D\Plugins\NavMeshUtils2D.cs" />
     <Compile Include="Assets\Navigation2D\TestScene\Move.cs" />
     <Compile Include="Assets\Navigation2D\TestScene\MoveUpDown.cs" />
+    <Compile Include="Assets\Scripts\AutoMove.cs" />
     <Compile Include="Assets\Scripts\Bars\FunctionPeriodic.cs" />
     <Compile Include="Assets\Scripts\Bars\StatBar.cs" />
     <Compile Include="Assets\Scripts\Bars\StatBarController.cs" />
@@ -79,6 +80,8 @@
     <Compile Include="Assets\Scripts\CharacterController2D.cs" />
     <Compile Include="Assets\Scripts\Controller.cs" />
     <Compile Include="Assets\Scripts\Dance.cs" />
+    <Compile Include="Assets\Scripts\Interaction.cs" />
+    <Compile Include="Assets\Scripts\NewPeopleToTheParty.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/KIKO/Desktop/Create with Code/Ludum Dare/Ludum Dare/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
