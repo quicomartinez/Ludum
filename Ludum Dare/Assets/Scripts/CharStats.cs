@@ -58,13 +58,4 @@ public class CharStats
     {
         hasDrink = ObjAction(hasDrink);
     }
-
-    public void ChangeDanceFloor()
-    { 
-        if (!busy)
-        {
-            UnityEngine.Debug.Log("FEVER");
-        }
-    }
-
 }
