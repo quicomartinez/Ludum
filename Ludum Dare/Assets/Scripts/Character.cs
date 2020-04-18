@@ -16,6 +16,9 @@ public class Character : MonoBehaviour
     [SerializeField]
     private float moveSpeed = 5f;
     Vector2 direction;
+    private bool canInteract;
+
+    string interactiveObjectsName;
 
     private void Awake()
     {
@@ -28,7 +31,20 @@ public class Character : MonoBehaviour
     private void FixedUpdate()
     {
         Movement();
-        //Interaction();
+    }
+
+    private void Update()
+    {
+        InteractWithItem();
+    }
+
+    private void InteractWithItem()
+    {
+        if (canInteract && controller.interactPressed)
+        {
+            UnityEngine.Debug.Log(interactiveObjectsName);
+            Interaction(interactiveObjectsName);
+        }
     }
 
     private void Movement()
@@ -37,7 +53,6 @@ public class Character : MonoBehaviour
 
         if (direction.magnitude > 0.2f)
         {
-            //transform.position += (Vector3)direction * Time.deltaTime * moveSpeed;
             characterController2D.velocity = direction * moveSpeed;
             animator.SetBool("walking", true);
         }
@@ -46,19 +61,18 @@ public class Character : MonoBehaviour
             characterController2D.velocity = Vector2.zero;
             animator.SetBool("walking", false);
         }
-
     }
 
-    void OnTriggerStay2D(Collider2D other)
-    {
-        UnityEngine.Debug.Log(controller.interactPressed);
 
-        if (controller.interactPressed)
-        {
-            String name = other.gameObject.name;
-            UnityEngine.Debug.Log(name);
-            Interaction(name);
-        }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        canInteract = true;
+        interactiveObjectsName = collision.gameObject.name;
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        canInteract = false;
     }
 
     private void Interaction(String name)
