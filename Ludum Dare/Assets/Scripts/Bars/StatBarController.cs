@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class StatBarController : MonoBehaviour
 {
-    public GameObject player;
-    public GameObject statBarManagerObject;
-    public GameObject peopleHandlerObject;
+    [SerializeField] private GameObject player;
+    [SerializeField] private GameObject peopleHandlerObject;
+
+    private GameObject statBarManagerObject;
     StatBarManager statBarManager;
 
-    [SerializeField] private StatBar statBarSafety;
-    [SerializeField] private StatBar statBarBooze;
-    [SerializeField] private StatBar statBarCleanness;
-    [SerializeField] private StatBar statBarDjFokus;
+    //[SerializeField]
+    // StatBars
+    GameObject safetyBarObject;
+    private StatBar statBarSafety;
+    GameObject boozeBarObject;
+    private StatBar statBarBooze;
+    GameObject cleannessBarObject;
+    private StatBar statBarCleanness;
+    GameObject djFokusBarObject;
+    private StatBar statBarDjFokus;
 
     // Initial value for each bar.
     private float statSafety = 0.5f;
@@ -32,11 +39,17 @@ public class StatBarController : MonoBehaviour
 
     // Getting HandlePeople component to access the list of NPCs
     HandlePeople handlePeople;
-    List<GameObject> npcList;
     float amountOfNPC;
+
+    // Counters, only good vibes used from here
+    GameObject countersObject;
+    Counters counter;
+
 
     void Start()
     {
+        // Subscriptions
+   
         character = player.GetComponent<Character>();
         interaction = character.GetInteraction();
         interaction.onVomit += Vomit;
@@ -46,14 +59,30 @@ public class StatBarController : MonoBehaviour
         interaction.onSixPack2Fridge += SixPack2Fridge;
         interaction.onBeer2Dj += Beer2Dj;
 
-        // Not needed after implementing a method to get beer from the fridge that raises an event if fridge is empty
-        handlePeople = peopleHandlerObject.GetComponent<HandlePeople>();
-        npcList = handlePeople.GetNPCList();
-        amountOfNPC = (float)npcList.Count;
 
-        // Bars
+        // Counters
+        countersObject = transform.Find("Counters").gameObject;
+        counter = countersObject.GetComponent<Counters>();
+
+        // Bar manager
+        statBarManagerObject = transform.Find("StatBarManager").gameObject;
         statBarManager = statBarManagerObject.GetComponent<StatBarManager>();
 
+        // Bar objects and statbars
+        safetyBarObject = transform.Find("StatBars/Safety").gameObject;
+        statBarSafety = safetyBarObject.GetComponent<StatBar>();
+
+        boozeBarObject = transform.Find("StatBars/Booze").gameObject;
+        statBarBooze = boozeBarObject.GetComponent<StatBar>();
+
+        cleannessBarObject = transform.Find("StatBars/Cleanness").gameObject;
+        statBarCleanness = cleannessBarObject.GetComponent<StatBar>();
+
+        djFokusBarObject = transform.Find("StatBars/DJFokus").gameObject;
+        statBarDjFokus = djFokusBarObject.GetComponent<StatBar>();
+
+      
+        // Initializing bars
         statBarManager.InitializeStatBar(statBarSafety, statSafety);
         statBarManager.InitializeStatBar(statBarBooze, statBooze);
         statBarManager.InitializeStatBar(statBarCleanness, statCleanness);
@@ -62,52 +91,17 @@ public class StatBarController : MonoBehaviour
         // Automatically starting to decrease
         statBarManager.PeriodicallyChangeStatBar(statBarDjFokus, -0.02f);
 
-        // Not needed after implementing a method to get beer from the fridge that raises an event if fridge is empty
-        statBarManager.PeriodicallyChangeStatBar(statBarBooze, -0.01f* amountOfNPC);
+        // Dynamic coroutine to reduce booze bar depending of the amount of npcs
+        statBarManager.PeriodicallyChangeStatBarDependingOnPeople(statBarBooze, -0.001f);
 
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-        //amountOfNPC = (float)npcList.Count;
-        //Debug.Log("npcs: " + amountOfNPC);
-        //statBarManager.PeriodicallyChangeStatBar(statBarBooze, -0.001f * amountOfNPC);
-
-        // statBarManager.PeriodicallyChangeStatBar(statBarSafety, 1f, -0.1f);
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //    addNewPuke();
-
-        // Safety
-
-        // Booze
-
-        // Cleanness
-
-
-        //if (pukeNumber > 3)
-        //{
-        //    pukeNumber = 0;
-        //    statBarManager.StopCoroutine("AddValueIE");
-        //  //  statBarManager.AddValue(statBarCleanness, -0.1f);
-        //}
-
-        // DJ Fokus
-
 
     }
 
-    // addnewpuke -> está suscrito al eveto generadoPuke del propio Puke que está existiendo en el juego
-    //void addNewPuke()
-    //{
-    //    pukeNumber++;
-    //}
-
-    //void onePukeWasCleaned()
-    //{
-    //    pukeNumber--;
-    //    statBarManager.PeriodicallyChangeStatBar(statBarCleanness, -0.01f);
-    //}
 
     // subscription to methods
     void Vomit()
@@ -119,6 +113,7 @@ public class StatBarController : MonoBehaviour
     void Mop2Vomit()
     {
         pukeNumber--;
+        counter.AddOneVibe();
         Debug.Log("onMop2Vomit");
         if (pukeNumber == 0)
         {
@@ -139,7 +134,8 @@ public class StatBarController : MonoBehaviour
     }
     void Cousin2Fight()
     {
-        fightNumber++;
+        fightNumber--;
+        counter.AddOneVibe();
         Debug.Log("onCousin2Fight");
         if (fightNumber == 0)
         {
@@ -154,6 +150,7 @@ public class StatBarController : MonoBehaviour
     void SixPack2Fridge()
     {
         float sixPackValue = 0.3f;
+        counter.AddOneVibe();
         statBarManager.AddValue(statBarBooze, sixPackValue);
         Debug.Log("onSixPack2Fridge");
 
@@ -161,6 +158,7 @@ public class StatBarController : MonoBehaviour
     void Beer2Dj()
     {
         float beerValue = 0.3f;
+        counter.AddOneVibe();
         statBarManager.AddValue(statBarDjFokus, beerValue);
         Debug.Log("onBeer2Dj");
 

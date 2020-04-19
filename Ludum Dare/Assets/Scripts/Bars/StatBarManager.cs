@@ -20,6 +20,11 @@ public class StatBarManager : MonoBehaviour
     {
         sb.PeriodicallyChangeStatBar(quantity);
     }
+
+    public void PeriodicallyChangeStatBarDependingOnPeople(StatBar sb, float quantity)
+    {
+        sb.PeriodicallyChangeStatBarDependingOnPeople(quantity);
+    }
 }
 
 

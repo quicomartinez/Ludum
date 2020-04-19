@@ -8,14 +8,21 @@ public class StatBar : MonoBehaviour
     private float value;
     private Coroutine coroutine;
     private Color originalBorderColor;
+    public GameObject peopleHandlerObject;
+
+    HandlePeople handlePeople;
+    float amountOfPeople;
     private void Awake()
     {
         bar = transform.Find("Bar");
         originalBorderColor = GetBorderColor();
+        //peopleHandlerObject = transform.parent.parent.gameObject;
+        handlePeople = peopleHandlerObject.GetComponent<HandlePeople>();
+        amountOfPeople = (float)handlePeople.GetNPCListCounter();
     }
     private void Start()
     {
-        
+
     }
 
 
@@ -87,6 +94,26 @@ public class StatBar : MonoBehaviour
         Color currentColor = transform.Find("Border").GetComponent<SpriteRenderer>().color;
         return currentColor;
     }
+
+    public void PeriodicallyChangeStatBarDependingOnPeople(float quantity)
+    {
+        if (coroutine != null)
+        {
+            StopCoroutine(coroutine);
+        }
+        coroutine = StartCoroutine(AddValueIEDynamic(quantity, 1f));
+    }
+    public IEnumerator AddValueIEDynamic(float quantity, float repeatRate)
+    {
+        while (true)
+        {
+            amountOfPeople = (float)handlePeople.GetNPCListCounter();
+            AddValue(quantity * amountOfPeople);
+            yield return new WaitForSeconds(repeatRate);
+        }
+    }
+
+
 
 }
 
