@@ -21,8 +21,23 @@ public class Interaction : MonoBehaviour
     public event Action onDropCousin;
     public event Action onFever;
 
+
     public CharStats charStats;
     public Cousin cousin;
+    [SerializeField]
+    private AudioClip sfxCleaning;
+    [SerializeField]
+    private AudioSource audioSource;
+    [SerializeField]
+    private AudioClip sfxPickMop;
+    [SerializeField]
+    private AudioClip sfxDropMop;
+    [SerializeField]
+    private AudioClip sfxTakeSixPack;
+    [SerializeField]
+    private AudioClip sfxDeliverBeer;
+    [SerializeField]
+    private AudioClip sfxTakeBeer;
 
     public void init()
     {
@@ -33,6 +48,7 @@ public class Interaction : MonoBehaviour
     {
         charStats = new CharStats();
         cousin = GameObject.Find("Cousin").GetComponent<Cousin>();
+        audioSource = GetComponent<AudioSource>();
 
     }
     public void EnterArea(GameObject interactiveObject)
@@ -41,36 +57,46 @@ public class Interaction : MonoBehaviour
         String name = interactiveObject.name;
         switch (name)
         {
-            case "vomit":
-
+            //case "Vomit(Clone)":
+               /* Debug.Log("ENTROENVOMITO");
                 if (charStats.hasMop)
                 {
+                    audioSource.PlayOneShot(sfxCleaning);
                     UnityEngine.Debug.Log("Cleaning the mess");
-                    Destroy(interactiveObject);
+                    //Destroy(interactiveObject);
                     if (onMop2Vomit != null) 
                         onMop2Vomit();
-                }
+                }*/
                     
                 /*else
                     chanceResbalar()*/
-                break;
+                //break;
             /*else
                     chanceTortazo()*/
 
             case "wc":
                 if (charStats.hasMop)
                 {
+                    AudioSource.PlayClipAtPoint(sfxDropMop, transform.position);
                     UnityEngine.Debug.Log("Droping Mop");
                     if (onDropMop != null)
-                        onDropMop();                    
+                        onDropMop();     
+                    
                 }                    
                 else
                 {
                     if (!charStats.busy)
                     {
+                        
+                        AudioSource.PlayClipAtPoint(sfxPickMop, transform.position);
                         UnityEngine.Debug.Log("Picking the Mop");
                         if (onGetMop != null)
                             onGetMop();
+                    }
+                    else
+                    {
+                        //ANIM BOCADILLO OBJETO QUE YA TENGO
+                        //metodo getItem de charStats
                     }
                 }
                     
@@ -91,6 +117,7 @@ public class Interaction : MonoBehaviour
                 if (charStats.hasSixPack)
                 {
                     //onSixPack2Fridge();
+                    AudioSource.PlayClipAtPoint(sfxDeliverBeer, transform.position);
                     UnityEngine.Debug.Log("SixPack Delivered!");                    
                     if (onSixPack2Fridge != null)
                     {
@@ -105,12 +132,14 @@ public class Interaction : MonoBehaviour
                 {
                     if (charStats.hasDrink)
                     {
+                        AudioSource.PlayClipAtPoint(sfxTakeBeer, transform.position);
                         UnityEngine.Debug.Log("Droping the Drink in the Fridge");
                         if (onDropDrink != null)
                             onDropDrink();
                     }                        
                     else
                     {
+                        AudioSource.PlayClipAtPoint(sfxTakeBeer, transform.position);
                         UnityEngine.Debug.Log("Cracking a cold one");
                         if (onGetDrink != null)
                             onGetDrink();
@@ -128,9 +157,14 @@ public class Interaction : MonoBehaviour
                 {
                     if (!charStats.busy)
                     {
+                        AudioSource.PlayClipAtPoint(sfxTakeSixPack, transform.position);
                         UnityEngine.Debug.Log("Picking a SixPack");
                         if (onGetSixPack != null)
                             onGetSixPack();                        
+                    }
+                    else
+                    {
+                        //BOCADILLO QUE OBJETO LLEVAS
                     }
                 }
                 charStats.ChangeSixPack();
@@ -156,5 +190,17 @@ public class Interaction : MonoBehaviour
 
                 break;
         }
+    }
+
+    public void GenerateOnFight()
+    {
+        if (onCousin2Fight != null)
+            onCousin2Fight();
+    }
+
+    public void GenerateOnVomit()
+    {
+        if (onMop2Vomit != null)
+            onMop2Vomit();
     }
 }

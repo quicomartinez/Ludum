@@ -1,18 +1,33 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class VomitScript : MonoBehaviour
 {
+    [SerializeField]
+    private AudioClip sfxClean;
+    [SerializeField]
+    private AudioClip sfxVomit;
+
+    private void Start()
+    {
+        AudioSource.PlayClipAtPoint(sfxVomit, transform.position);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("aaa");
+
         if (collision.gameObject.name == "Player" && collision.gameObject.GetComponent<Interaction>().charStats.hasMop)
         {
-            Debug.Log("bbb");
+            AudioSource.PlayClipAtPoint(sfxClean, transform.position);
+            collision.gameObject.GetComponent<Interaction>().GenerateOnFight();
             Destroy(gameObject);
-            //RESTA PUNTUACIÓN BATALLAS
         }
+
+
+            //RESTA PUNTUACIÓN BATALLAS
+        
         
     }
 }

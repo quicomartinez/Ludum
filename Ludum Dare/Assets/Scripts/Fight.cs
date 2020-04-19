@@ -7,12 +7,12 @@ public class Fight : MonoBehaviour
 {
     GameObject fighter1;
     GameObject fighter2;
-
-    public event Action onCousin2Fight;
+    AudioSource audiosource;
 
     private void Start()
     {
-
+        audiosource = GetComponent<AudioSource>();
+        audiosource.Play();
     }
 
     public void AssignNpc1( GameObject npcToAssign)
@@ -42,9 +42,7 @@ public class Fight : MonoBehaviour
                 interaction.cousin.StopFollowingPlayer();
                 interaction.charStats.ChangeCousin();
                 Destroy(gameObject);
-                if (onCousin2Fight != null)
-                    onCousin2Fight();
-
+                interaction.GenerateOnFight();
 
                 Destroy(gameObject);
             }

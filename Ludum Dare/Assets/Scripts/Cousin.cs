@@ -69,7 +69,7 @@ public class Cousin : MonoBehaviour
 
         else
         {
-            GetComponent<NavMeshAgent2D>().destination = new Vector3(-5, 0, 0);
+            GetComponent<NavMeshAgent2D>().destination = new Vector3(-6.06f, 0.76f, 0);
         }
     }
 }

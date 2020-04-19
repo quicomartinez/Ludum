@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Security.Policy;
 using UnityEngine;
 
 public class CharStats
@@ -11,7 +12,24 @@ public class CharStats
     public bool hasSixPack;
     public bool hasDrink;
     public bool busy;
-    
+
+    private String aniMop = "thinkingMop";
+    private String aniBeer = "thinkingBeer";
+    private String ani6Pack= "thinking6Pack";
+    private String aniCousin = "thinkingCousin";
+    public String getItem()
+    {
+        if (hasMop)
+            return aniMop;
+        if (hasDrink)
+            return aniBeer;
+        if (hasSixPack)
+            return ani6Pack;
+        if (hasCousin)
+            return aniCousin;
+        return "";
+    }
+
     public void RaiseBusy()
     {
         UnityEngine.Debug.Log("U R Busy");
@@ -59,5 +77,5 @@ public class CharStats
         hasDrink = ObjAction(hasDrink);
     }
 
-    
+
 }

@@ -95,6 +95,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43623d325957b694eaf343b8617a6d0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sfxClean: {fileID: 8300000, guid: 421e4fd6a417eb545bc3af7981e9480e, type: 3}
+  sfxVomit: {fileID: 8300000, guid: 022f145026832b8459f73a8e87e7b705, type: 3}
 --- !u!58 &5514468366314163241
 CircleCollider2D:
   m_ObjectHideFlags: 0
