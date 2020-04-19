@@ -70,11 +70,21 @@ public class Character : MonoBehaviour
     {
         canInteract = true;
         interactiveObjectsName = collision.gameObject.name;
+
+        if (collision.gameObject.CompareTag("People"))
+        {
+            moveSpeed = 1f;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         canInteract = false;
+
+        if (collision.gameObject.CompareTag("People"))
+        {
+            moveSpeed = 5f;
+        }
     }
 
     public Interaction GetInteraction()

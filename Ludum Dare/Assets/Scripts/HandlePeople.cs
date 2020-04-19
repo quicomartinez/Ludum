@@ -17,14 +17,23 @@ public class HandlePeople : MonoBehaviour
         npcList.Add(npc);
     }
 
-    //Esta fallando
+
     public GameObject GetRandomNpc()
     {
-        return npcList[0];
+        int index = Random.Range(0, npcList.Count);
+        Debug.Log(index);
+        return npcList[index];
     }
 
-    private void Update()
+    //Returns List with the NPC in game
+    public List<GameObject> GetNPCList()
     {
+        return npcList;
+    }
 
+    //Returns int with number of NPC in game
+    public int GetNPCListCounter()
+    {
+        return npcList.Count;
     }
 }

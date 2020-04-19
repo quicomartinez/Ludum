@@ -37,6 +37,7 @@ public class NewVomitToTheParty : MonoBehaviour
             GameObject npcToInstantiate = handlePeople.GetRandomNpc();
             Instantiate(vomit, npcToInstantiate.transform.position, Quaternion.identity);
 
+
             float waitTime = Random.Range(2, 4f);
             yield return new WaitForSeconds(waitTime);
         }

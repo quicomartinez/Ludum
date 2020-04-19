@@ -720,7 +720,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76ca4f6c7d6bd0541bb2f2d8260de056, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectStatBarManager: {fileID: 2777897375994631631}
+  player: {fileID: 0}
+  statBarManagerObject: {fileID: 0}
+  peopleHandlerObject: {fileID: 0}
   statBarSafety: {fileID: 2777897377003028255}
   statBarBooze: {fileID: 2777897376840947637}
   statBarCleanness: {fileID: 2777897377039856962}

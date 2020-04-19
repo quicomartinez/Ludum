@@ -19,7 +19,7 @@ public class Cousin : MonoBehaviour
     private void Update()
     {
         //solo para testear
-        /*StartFollowingPlayer();
+        StartFollowingPlayer();
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -29,7 +29,7 @@ public class Cousin : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.A))
         {
             StopFollowingPlayer();
-        }*/
+        }
     }
 
     public void StartFollowingPlayer()

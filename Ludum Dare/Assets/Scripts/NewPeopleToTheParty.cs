@@ -7,6 +7,9 @@ public class NewPeopleToTheParty : MonoBehaviour
     [SerializeField]
     private GameObject people;
 
+    [SerializeField]
+    private Sprite[] animals;
+
     private Coroutine coroutine;
     private HandlePeople handlePeople;
 
@@ -35,6 +38,7 @@ public class NewPeopleToTheParty : MonoBehaviour
         while (true)
         {
             GameObject peopleToSave = Instantiate(people, new Vector3(-5f, -3.5f, 0), Quaternion.identity);
+            peopleToSave.GetComponentInChildren<SpriteRenderer>().sprite = animals[Random.Range(0, animals.Length)];
             handlePeople.AddNPC(peopleToSave);
             float waitTime = Random.Range(0, 4f);
             yield return new WaitForSeconds(waitTime);
