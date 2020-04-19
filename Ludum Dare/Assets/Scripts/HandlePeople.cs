@@ -8,7 +8,6 @@ public class HandlePeople : MonoBehaviour
 
     private void Start()
     {
-        npcList.Add(GameObject.Find("Player"));
 
     }
 
@@ -21,7 +20,6 @@ public class HandlePeople : MonoBehaviour
     public GameObject GetRandomNpc()
     {
         int index = Random.Range(0, npcList.Count);
-        Debug.Log(index);
         return npcList[index];
     }
 

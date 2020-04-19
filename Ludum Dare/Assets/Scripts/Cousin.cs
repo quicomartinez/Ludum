@@ -36,7 +36,6 @@ public class Cousin : MonoBehaviour
     {
         if (followPlayer == true)
         {
-            Debug.Log("AAA");
             StopCoroutine(coroutine);
             GetComponent<NavMeshAgent2D>().destination = player.transform.position;
         }
@@ -64,7 +63,6 @@ public class Cousin : MonoBehaviour
         while (true)
         {
             Vector3 destination = placesToMove[Random.Range(0, placesToMove.Length)];
-            Debug.Log(destination);
             GetComponent<NavMeshAgent2D>().destination = destination;
             float waitTime = Random.Range(4, 8f);
             yield return new WaitForSeconds(waitTime);

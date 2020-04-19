@@ -19,4 +19,9 @@ public class AutoMove : MonoBehaviour
 
     }
 
+    public void MoveToFight(Vector3 placeToFight)
+    {
+        GetComponent<NavMeshAgent2D>().destination = placeToFight;
+    }
+
 }
