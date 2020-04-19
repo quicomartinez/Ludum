@@ -75,6 +75,8 @@
      <Compile Include="Assets\Scripts\Controller.cs" />
      <Compile Include="Assets\Scripts\Cousin.cs" />
      <Compile Include="Assets\Scripts\Dance.cs" />
+     <Compile Include="Assets\Scripts\Fight.cs" />
+     <Compile Include="Assets\Scripts\FightHandler.cs" />
      <Compile Include="Assets\Scripts\HandlePeople.cs" />
      <Compile Include="Assets\Scripts\Interaction.cs" />
      <Compile Include="Assets\Scripts\NewPeopleToTheParty.cs" />

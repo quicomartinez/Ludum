@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Interaction
+public class Interaction : MonoBehaviour
 {
     public event Action onVomit;
     public event Action onMop2Vomit;
@@ -21,7 +21,7 @@ public class Interaction
     public event Action onDropCousin;
     public event Action onFever;
 
-    private CharStats charStats;
+    public CharStats charStats;
     public void init()
     {
         charStats = new CharStats();
@@ -37,7 +37,7 @@ public class Interaction
                 {
                     UnityEngine.Debug.Log("Cleaning the mess");
                     Destroy(interactiveObject);
-                    if (onDropVomit != null) 
+                    if (onMop2Vomit != null) 
                         onMop2Vomit();
                 }
                     
