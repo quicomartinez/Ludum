@@ -20,6 +20,7 @@ public class Character : MonoBehaviour
     private bool canInteract;
 
     string interactiveObjectsName;
+    GameObject interactiveObject;
 
     private void Awake()
     {
@@ -45,7 +46,7 @@ public class Character : MonoBehaviour
         if (canInteract && controller.interactPressed)
         {
             UnityEngine.Debug.Log(interactiveObjectsName);
-            interaction.EnterArea(interactiveObjectsName);
+            interaction.EnterArea(interactiveObject);
         }
     }
 
@@ -70,7 +71,7 @@ public class Character : MonoBehaviour
     {
         canInteract = true;
         interactiveObjectsName = collision.gameObject.name;
-
+        interactiveObject = collision.gameObject;
         if (collision.gameObject.CompareTag("People"))
         {
             moveSpeed = 1f;

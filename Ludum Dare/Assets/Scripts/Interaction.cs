@@ -11,14 +11,24 @@ public class Interaction
     public event Action onCousin2Fight;
     public event Action onSixPack2Fridge;
     public event Action onBeer2Dj;
+    public event Action onGetMop;
+    public event Action onGetSixPack;
+    public event Action onGetDrink;
+    public event Action onGetCousin;
+    public event Action onDropMop;
+    public event Action onDropSixPack;
+    public event Action onDropDrink;
+    public event Action onDropCousin;
+    public event Action onFever;
 
     private CharStats charStats;
     public void init()
     {
         charStats = new CharStats();
     }
-    public void EnterArea(String name)
+    public void EnterArea(GameObject interactiveObject)
     {
+        String name = interactiveObject.name;
         switch (name)
         {
             case "vomit":
@@ -26,7 +36,9 @@ public class Interaction
                 if (charStats.hasMop)
                 {
                     UnityEngine.Debug.Log("Cleaning the mess");
-                    onMop2Vomit();
+                    Destroy(interactiveObject);
+                    if (onDropVomit != null) 
+                        onMop2Vomit();
                 }
                     
                 /*else
@@ -45,21 +57,37 @@ public class Interaction
                 break;
             case "wc":
                 if (charStats.hasMop)
+                {
                     UnityEngine.Debug.Log("Droping Mop");
+                    if (onDropMop != null)
+                        onDropMop();                    
+                }                    
                 else
-                    UnityEngine.Debug.Log("Picking the Mop");
+                {
+                    if (!charStats.busy)
+                    {
+                        UnityEngine.Debug.Log("Picking the Mop");
+                        if (onGetMop != null)
+                            onGetMop();
+                    }
+                }
+                    
                 charStats.ChangeMop();
                 // resetMop?
                 break;
             case "cousin":
-                charStats.ChangeCousin();
-
+                if (!charStats.busy)
+                {
+                    charStats.ChangeCousin();
+                    if (onGetCousin != null)
+                        onGetCousin();
+                }   
                 break;
             case "fridge":
                 if (charStats.hasSixPack)
                 {
                     //onSixPack2Fridge();
-                    UnityEngine.Debug.Log("SixPack Delivered!");
+                    UnityEngine.Debug.Log("SixPack Delivered!");                    
                     if (onSixPack2Fridge != null)
                     {
                         onSixPack2Fridge();
@@ -72,15 +100,35 @@ public class Interaction
                 else
                 {
                     if (charStats.hasDrink)
+                    {
                         UnityEngine.Debug.Log("Droping the Drink in the Fridge");
+                        if (onDropDrink != null)
+                            onDropDrink();
+                    }                        
                     else
+                    {
                         UnityEngine.Debug.Log("Cracking a cold one");
+                        if (onGetDrink != null)
+                            onGetDrink();
+                    }                        
                     charStats.ChangeDrink();
-
                 }
                 break;
             case "storage":
-                UnityEngine.Debug.Log("Picking a SixPack");
+                if (charStats.hasSixPack)
+                {
+                    if (onDropSixPack != null)
+                        onDropSixPack();
+                }
+                else
+                {
+                    if (!charStats.busy)
+                    {
+                        UnityEngine.Debug.Log("Picking a SixPack");
+                        if (onGetSixPack != null)
+                            onGetSixPack();                        
+                    }
+                }
                 charStats.ChangeSixPack();
                 break;
             case "dj":
@@ -96,7 +144,12 @@ public class Interaction
             case "danceFloor":
                 // if fever?
                 if (!charStats.busy)
+                {
                     UnityEngine.Debug.Log("Fever!");
+                    if (onFever != null)
+                        onFever();
+                }
+
                 break;
         }
     }
