@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3288715378116494282}
   - component: {fileID: 4215389416292501063}
+  - component: {fileID: -1975486333681501024}
+  - component: {fileID: 5514468366314163241}
   m_Layer: 0
   m_Name: Vomit
   m_TagString: Untagged
@@ -81,3 +83,31 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-1975486333681501024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1701608563583333291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43623d325957b694eaf343b8617a6d0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!58 &5514468366314163241
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1701608563583333291}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.435

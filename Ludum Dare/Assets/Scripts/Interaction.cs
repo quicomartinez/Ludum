@@ -22,18 +22,22 @@ public class Interaction : MonoBehaviour
     public event Action onFever;
 
     public CharStats charStats;
-    private GameObject cousin;
+    public Cousin cousin;
+
     public void init()
     {
         charStats = new CharStats();
+        Debug.Log("IMPORTANDO");
     }
     private void Start()
     {
         charStats = new CharStats();
-        cousin = GameObject.Find("Cousin");
+        cousin = GameObject.Find("Cousin").GetComponent<Cousin>();
+
     }
     public void EnterArea(GameObject interactiveObject)
     {
+        Debug.Log("SU PUTO NOMBRE" + interactiveObject);
         String name = interactiveObject.name;
         switch (name)
         {
@@ -50,18 +54,9 @@ public class Interaction : MonoBehaviour
                 /*else
                     chanceResbalar()*/
                 break;
-            case "fight":
-                if (charStats.hasCousin)
-                {
-                    cousin.GetComponent<Cousin>().StopFollowingPlayer();
-                    UnityEngine.Debug.Log("Solving the Fight!");
-                    //solveFight()
-                    if (onCousin2Fight != null)
-                        onCousin2Fight();
-                }
-                /*else
+            /*else
                     chanceTortazo()*/
-                break;
+
             case "wc":
                 if (charStats.hasMop)
                 {
@@ -82,10 +77,11 @@ public class Interaction : MonoBehaviour
                 charStats.ChangeMop();
                 // resetMop?
                 break;
-            case "cousin":
+            case "Cousin":
+
                 if (!charStats.busy)
                 {
-                    cousin.GetComponent<Cousin>().StartFollowingPlayer();
+                    cousin.StartFollowingPlayer();
                     charStats.ChangeCousin();
                     if (onGetCousin != null)
                         onGetCousin();

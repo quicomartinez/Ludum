@@ -13,42 +13,30 @@ public class Cousin : MonoBehaviour
     private void Start()
     {
         player = GameObject.Find("Player");
-        PeriodicallyMoveCousin();
-    }
+        //PeriodicallyMoveCousin();
 
-    private void Update()
-    {
-        //solo para testear
-        StartFollowingPlayer();
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            followPlayer = true;
-        }
-
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            StopFollowingPlayer();
-        }
     }
 
     public void StartFollowingPlayer()
     {
-        if (followPlayer == true)
+
+        if (followPlayer == false)
         {
-            StopCoroutine(coroutine);
-            GetComponent<NavMeshAgent2D>().destination = player.transform.position;
+            Debug.Log("ENTRA");
+            followPlayer = true;
+            //StopCoroutine(coroutine);
+  
         }
     }
 
     public void StopFollowingPlayer()
     {
         followPlayer = false;
-        PeriodicallyMoveCousin();
+        //PeriodicallyMoveCousin();
     }
 
 
-    public void PeriodicallyMoveCousin()
+    /*public void PeriodicallyMoveCousin()
     {
         if (coroutine != null)
         {
@@ -67,6 +55,21 @@ public class Cousin : MonoBehaviour
             float waitTime = Random.Range(4, 8f);
             yield return new WaitForSeconds(waitTime);
         }
-    }
+    }*/
 
+
+    private void Update()
+    {
+        Debug.Log(followPlayer);
+        
+        if (followPlayer == true)
+        {
+            GetComponent<NavMeshAgent2D>().destination = player.transform.position;
+        }
+
+        else
+        {
+            GetComponent<NavMeshAgent2D>().destination = new Vector3(-5, 0, 0);
+        }
+    }
 }

@@ -8,17 +8,27 @@ public class StatBar : MonoBehaviour
     private float value;
     private Coroutine coroutine;
     private Color originalBorderColor;
-    public GameObject peopleHandlerObject;
+    private StatBarController barController;
 
+    GameObject handlerObject;
     HandlePeople handlePeople;
+    FightHandler fightHandler;
     float amountOfPeople;
+    float amountOfFights;
+
+    float safetyRecovery = 0.02f;
+
     private void Awake()
     {
         bar = transform.Find("Bar");
         originalBorderColor = GetBorderColor();
         //peopleHandlerObject = transform.parent.parent.gameObject;
-        handlePeople = peopleHandlerObject.GetComponent<HandlePeople>();
-        amountOfPeople = (float)handlePeople.GetNPCListCounter();
+        
+        barController = transform.parent.parent.gameObject.GetComponent<StatBarController>();
+        handlerObject = barController.handlerObject;
+        handlePeople = handlerObject.GetComponent<HandlePeople>();
+        //amountOfPeople = (float)handlePeople.GetNPCListCounter();
+        
     }
     private void Start()
     {
@@ -101,18 +111,64 @@ public class StatBar : MonoBehaviour
         {
             StopCoroutine(coroutine);
         }
-        coroutine = StartCoroutine(AddValueIEDynamic(quantity, 1f));
+        coroutine = StartCoroutine(AddValueIEDynamicPeople(quantity, 1f));
     }
-    public IEnumerator AddValueIEDynamic(float quantity, float repeatRate)
+    public IEnumerator AddValueIEDynamicPeople(float quantity, float repeatRate)
     {
         while (true)
         {
             amountOfPeople = (float)handlePeople.GetNPCListCounter();
             AddValue(quantity * amountOfPeople);
+            
             yield return new WaitForSeconds(repeatRate);
         }
     }
 
+    public void PeriodicallyChangeStatBarDependingOnFights(float quantity)
+    {
+        if (coroutine != null)
+        {
+            StopCoroutine(coroutine);
+        }
+        coroutine = StartCoroutine(AddValueIEDynamicFight(quantity, 1f));
+    }
+    public IEnumerator AddValueIEDynamicFight(float quantity, float repeatRate)
+    {
+        while (true)
+        {
+            amountOfFights = (float)barController.GetFightNumber();
+            if (amountOfFights == 0)
+            {
+
+                AddValue(safetyRecovery);
+
+            }
+            else
+            {
+                AddValue(quantity * amountOfFights);
+            }
+
+            yield return new WaitForSeconds(repeatRate);
+        }
+    }
+
+    //public void PeriodicallyChangeStatBarDependingOnVomits(float quantity)
+    //{
+    //    if (coroutine != null)
+    //    {
+    //        StopCoroutine(coroutine);
+    //    }
+    //    coroutine = StartCoroutine(AddValueIEDynamicVomits(quantity, 1f));
+    //}
+    //public IEnumerator AddValueIEDynamicVomits(float quantity, float repeatRate)
+    //{
+    //    while (true)
+    //    {
+    //        amountOfPeople = (float)handlePeople.GetNPCListCounter();
+    //        AddValue(quantity * amountOfPeople);
+    //        yield return new WaitForSeconds(repeatRate);
+    //    }
+    //}
 
 
 }

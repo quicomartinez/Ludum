@@ -1,12 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+
 
 public class FightHandler : MonoBehaviour
 {
 
     private Coroutine coroutine;
     private HandlePeople handlePeople;
+
+    public event Action onNewFight;
 
     [SerializeField]
     private GameObject cloudFigth;
@@ -63,8 +67,13 @@ public class FightHandler : MonoBehaviour
 
             npc1.GetComponent<AutoMove>().MoveToFight(placeToFight - (0.25f * (placeToFight - npc1.transform.position)));
             npc2.GetComponent<AutoMove>().MoveToFight(placeToFight);
+            
+            if (onNewFight != null)
+            {
+                onNewFight();
+            }
 
-            float waitTime = Random.Range(10, 15f);
+            float waitTime = UnityEngine.Random.Range(10, 15f);
             yield return new WaitForSeconds(waitTime);
         }
     }

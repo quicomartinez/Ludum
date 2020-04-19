@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using UnityEngine;
-using static Interaction;
+//using static Interaction;
 
 public class Character : MonoBehaviour
 {
@@ -26,8 +26,10 @@ public class Character : MonoBehaviour
     {
         controller = GetComponent<Controller>();
         animator = GetComponent<Animator>();
-        interaction = new Interaction();
-        interaction.init();
+        //interaction = new Interaction();
+        //interaction.init();
+        interaction = GetComponent<Interaction>();
+
         characterController2D = GetComponent<CharacterController2D>();
     }
 

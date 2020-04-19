@@ -25,6 +25,18 @@ public class StatBarManager : MonoBehaviour
     {
         sb.PeriodicallyChangeStatBarDependingOnPeople(quantity);
     }
+
+
+    public void PeriodicallyChangeStatBarDependingOnFights(StatBar sb, float quantity)
+    {
+        sb.PeriodicallyChangeStatBarDependingOnFights(quantity);
+    }
+
+    //public void PeriodicallyChangeStatBarDependingOnPukes(StatBar sb, float quantity)
+    //{
+    //    sb.PeriodicallyChangeStatBarDependingOnPeople(quantity);
+    //}
+
 }
 
 

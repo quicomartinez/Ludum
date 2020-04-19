@@ -58,4 +58,6 @@ public class CharStats
     {
         hasDrink = ObjAction(hasDrink);
     }
+
+    
 }
