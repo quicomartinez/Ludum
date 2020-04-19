@@ -22,9 +22,15 @@ public class Interaction : MonoBehaviour
     public event Action onFever;
 
     public CharStats charStats;
+    private GameObject cousin;
     public void init()
     {
         charStats = new CharStats();
+    }
+    private void Start()
+    {
+        charStats = new CharStats();
+        cousin = GameObject.Find("Cousin");
     }
     public void EnterArea(GameObject interactiveObject)
     {
@@ -47,6 +53,7 @@ public class Interaction : MonoBehaviour
             case "fight":
                 if (charStats.hasCousin)
                 {
+                    cousin.GetComponent<Cousin>().StopFollowingPlayer();
                     UnityEngine.Debug.Log("Solving the Fight!");
                     //solveFight()
                     if (onCousin2Fight != null)
@@ -78,6 +85,7 @@ public class Interaction : MonoBehaviour
             case "cousin":
                 if (!charStats.busy)
                 {
+                    cousin.GetComponent<Cousin>().StartFollowingPlayer();
                     charStats.ChangeCousin();
                     if (onGetCousin != null)
                         onGetCousin();

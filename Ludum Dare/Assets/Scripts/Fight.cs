@@ -28,7 +28,7 @@ public class Fight : MonoBehaviour
     //FALTA CONDICIÓN DEL PRIMO
     private void OnTriggerEnter2D(Collider2D collision)
     {   
-        if (collision.gameObject.name == "Player" && gameObject.GetComponent<Character>().GetInteraction().charStats.hasCousin) 
+        if (collision.gameObject.name == "Player" && gameObject.GetComponent<Interaction>().charStats.hasCousin) 
         {
             fighter1.GetComponentInChildren<SpriteRenderer>().color = Color.white;
             fighter2.GetComponentInChildren<SpriteRenderer>().color = Color.white;
